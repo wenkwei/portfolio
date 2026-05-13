@@ -349,9 +349,6 @@
         .copy-email {
             color: var(--primary-color);
             cursor: pointer;
-            text-decoration: underline;
-            margin-bottom: 10px;
-            display: block;
         }
 
         /* 模态框 */
@@ -589,8 +586,7 @@
         <div class="container">
             <h2 class="section-title">联系方式</h2>
             <div class="contact-info">
-                <span>邮箱：</span>
-                <span class="copy-email" onclick="copyToClipboard('wenkwei@163.com')">wenkwei@163.com</span>
+                <span>邮箱：<span class="copy-email" onclick="copyToClipboard('wenkwei@163.com')" style="display:inline; color:var(--primary-color);">wenkwei@163.com</span></span>
                 <span style="margin:0 15px; color:#d1d5db;">|</span>
                 <span>电话：13530893849</span>
             </div>
