@@ -340,6 +340,10 @@
         .contact-info {
             margin: 5px 0;
             font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         .copy-email {
@@ -586,7 +590,8 @@
             <h2 class="section-title">联系方式</h2>
             <div class="contact-info">
                 <span class="copy-email" onclick="copyToClipboard('wenkwei@163.com')">wenkwei@163.com</span>
-                <p>电话：13530893849</p>
+                <span style="margin:0 15px; color:#d1d5db;">|</span>
+                <span>13530893849</span>
             </div>
         </div>
     </section>
