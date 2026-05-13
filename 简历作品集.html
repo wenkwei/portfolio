@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温柯伟 | AI产品经理作品集</title>
+    <style>
+        /* 全局变量与样式重置 */
+        :root {
+            --primary-color: #1e3a8a;
+            --bg-gray: #f3f4f6;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-gray);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 顶部导航 */
+        header {
+            background-color: var(--white);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        nav a {
+            margin-left: 2rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        /* 新增：返回顶部悬浮按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Hero区 */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--white);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+            margin-top: 10px;
+        }
+
+        /* 项目展示区 */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-group {
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .project-card .background {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 3px solid #cbd5e1;
+        }
+
+        .project-card h4 {
+            margin: 15px 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .decision-list {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .decision-list li {
+            margin-bottom: 8px;
+        }
+
+        .data-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .data-item span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .data-item label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 180px;
+            background: #e5e7eb;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            border: 2px dashed #d1d5db;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        /* 能力标签区 */
+        .skills-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--white);
+            border: 1px solid #e5e7eb;
+            border-radius: 50px;
+            margin: 8px;
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* 关于我 */
+        .about-section {
+            background: var(--white);
+            padding: 80px 0;
+            margin-top: 60px;
+        }
+
+        .about-grid {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 联系方式 */
+        .contact-section {
+            padding: 40px 0 60px;
+            text-align: center;
+        }
+
+        .contact-section .section-title {
+            margin: 0 0 10px;
+        }
+
+        .contact-info {
+            margin: 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .copy-email {
+            color: var(--primary-color);
+            cursor: pointer;
+            text-decoration: underline;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 0;
+            border-radius: 16px;
+            max-width: 1200px;
+            width: 66%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-inner {
+            padding: 60px;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .modal-content table {
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 1400px) {
+            .modal-content {
+                max-width: 1300px;
+            }
+            .modal-inner {
+                padding: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 0;
+                width: 100%;
+                border-radius: 12px;
+            }
+            .modal-inner {
+                padding: 20px;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* 底部 */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 60px 0; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .about-grid { flex-direction: column; text-align: center; }
+            .data-box { flex-direction: column; gap: 15px; }
+        }
+
+        /* 超小屏适配 */
+        @media (max-width: 480px) {
+            nav a { margin-left: 1rem; font-size: 0.85rem; }
+            .skill-tag { padding: 6px 14px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- 顶部导航 -->
+    <header>
+        <div class="container">
+            <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">温柯伟</div>
+            <nav>
+                <a href="#" onclick="closeAllModals(); window.scrollTo({top: 0, behavior: 'smooth'}); return false;">首页</a>
+                <a href="#projects">项目展示</a>
+                <a href="#about">关于我</a>
+                <a href="#contact">联系我</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero区 -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI产品经理 · 温柯伟</h1>
+            <p style="font-size:1rem; color:var(--primary-color); font-weight:600; margin-top:-0.5rem; margin-bottom:1.5rem;">求职意向：AI产品经理 / AI方案产品经理</p>
+            <p>掌握大模型应用开发全流程，专注于RAG智能知识库与AI Agent产品从0到1落地，具备AI产品全生命周期管理经验。</p>
+            <button class="btn btn-primary" onclick="location.href='#projects'">查看核心项目</button>
+        </div>
+    </section>
+
+    <!-- 项目展示区 -->
+    <section class="container" id="projects">
+        <h2 class="section-title">核心项目案例</h2>
+        <div class="projects-grid">
+            
+            <!-- 项目1 -->
+            <div class="project-card">
+                <div class="tag-group">
+                    <span class="tag">检索增强生成 (RAG)</span>
+                    <span class="tag">自助解决率82%</span>
+                    <span class="tag">置信度机制</span>
+                </div>
+                <h3>企业智能知识库（RAG问答系统）</h3>
+                <p class="background">背景：某制造企业拥有500+产品手册、FAQ文档，员工查找答案平均耗时5分钟，重复咨询占人工客服40%工作量。</p>
+
+                <h4>产品方案亮点</h4>
+                <ul class="decision-list">
+                    <li><strong>检索优化：</strong>混合检索（向量+关键词）提升召回率，通过A/B测试确定最优分块大小。</li>
+                    <li><strong>置信度机制：</strong>检索结果置信度&lt;0.6时自动转人工，并附原文链接，平衡自动化与准确率。</li>
+                    <li><strong>运营闭环：</strong>BadCase自动入库，运营可修正答案、补充文档，形成持续优化机制。</li>
+                </ul>
+
+                <div class="data-box">
+                    <div class="data-item">
+                        <span>82%</span>
+                        <label>自助解决率</label>
+                    </div>
+                    <div class="data-item">
+                        <span>15min → 30s</span>
+                        <label>员工查询时间</label>
+                    </div>
+                    <div class="data-item">
+                        <span>4.6/5</span>
+                        <label>用户满意度</label>
+                    </div>
+                </div>
+
+                <img src="images/page3_IM48_1.jpg" alt="用户端智能问答主界面" class="project-img">
+
+                <button class="btn btn-outline" onclick="openModal('prd-rag')">查看完整项目详情</button>
+            </div>
+
+            <!-- 项目2 -->
+            <div class="project-card">
+                <div class="tag-group">
+                    <span class="tag">Agent架构</span>
+                    <span class="tag">高危100%拦截</span>
+                    <span class="tag">转人工率↓28%</span>
+                </div>
+                <h3>企业级智能客服售后Agent产品</h3>
+                <p class="background">背景：某智能安防厂商通过数百家经销商销售产品，售后咨询日均300+，高危操作无管控，问题解决周期长达2-3天。</p>
+
+                <h4>产品方案亮点</h4>
+                <ul class="decision-list">
+                    <li><strong>混合架构设计：</strong>规则引擎（高危词拦截）+ 大模型意图识别 + 传统模型置信度阈值，兼顾安全与灵活。</li>
+                    <li><strong>Agent三层架构：</strong>意图识别层、任务规划层、工具调用层，实现复杂业务场景。</li>
+                    <li><strong>安全兜底机制：</strong>高危操作100%拦截，低置信度转人工，所有转人工场景携带完整上下文。</li>
+                </ul>
+
+                <div class="data-box">
+                    <div class="data-item">
+                        <span>5min → 30s</span>
+                        <label>平均响应时间</label>
+                    </div>
+                    <div class="data-item">
+                        <span>100%</span>
+                        <label>高危拦截率</label>
+                    </div>
+                    <div class="data-item">
+                        <span>65% → 28%</span>
+                        <label>转人工率</label>
+                    </div>
+                </div>
+
+                <img src="images/page7_IM64_7.jpg" alt="Web端智能问答主界面" class="project-img">
+
+                <button class="btn btn-outline" onclick="openModal('dialog-design')">查看完整项目详情</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 能力标签区 -->
+    <section class="container skills-section">
+        <h2 class="section-title">专业能力</h2>
+        <div>
+            <span class="skill-tag">Prompt工程</span>
+            <span class="skill-tag">RAG检索增强</span>
+            <span class="skill-tag">大模型应用开发</span>
+            <span class="skill-tag">LlamaIndex / LangChain</span>
+            <span class="skill-tag">Dify / Coze平台</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">大模型微调</span>
+            <span class="skill-tag">智能客服/Agent</span>
+            <span class="skill-tag">AI产品全生命周期</span>
+            <span class="skill-tag">跨职能团队管理</span>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">关于我</h2>
+            <div style="max-width:800px; margin:0 auto; font-size:1.1rem; line-height:1.8;">
+                <p><strong>温柯伟</strong>，AI产品经理，拥有多个AI系统项目从0到1的落地经验，具备AI技术产品全生命周期管理能力。</p>
+                <p>掌握大模型应用开发全流程，完成3个本地部署的RAG应用项目；精通Prompt工程，设计过10+场景化提示词模板，提升问答准确率35%；熟悉Dify/Coze低代码平台，完成多个智能客服、图文生成原型系统搭建。</p>
+                <p>擅长跨职能团队协作，最多同时领导10人团队（算法/测试/开发/产品），持有PMP认证，致力于将AI技术转化为可量化的业务价值。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">联系方式</h2>
+            <div class="contact-info">
+                <span class="copy-email" onclick="copyToClipboard('wenkwei@163.com')">wenkwei@163.com</span>
+                <p>电话：13530893849</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer>
+        <p>© 2024 温柯伟 | AI产品经理作品集</p>
+        <p>最后更新：<span id="update-date"></span></p>
+    </footer>
+
+    <!-- ============ 模态框：项目一 企业智能知识库(RAG) ============ -->
+    <div id="prd-rag" class="modal" onclick="closeModal(event, 'prd-rag')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="document.getElementById('prd-rag').style.display='none'">&times;</span>
+            <div class="modal-inner">
+
+            <h2>项目一：企业智能知识库（RAG 问答系统）</h2>
+            <hr style="margin:20px 0;">
+
+            <!-- 1、项目概述 -->
+            <h3 style="margin-top:20px;">1、项目概述</h3>
+            <ul style="margin-bottom:15px;">
+                <li><strong>背景：</strong>某制造企业拥有500+产品手册、FAQ文档，员工查找答案平均耗时5分钟，重复咨询占人工客服40%工作量。</li>
+                <li><strong>目标：</strong>构建基于RAG的智能知识库，实现员工自助查询，降低人工咨询量。</li>
+                <li><strong>我的角色：</strong>产品负责人，从0到1完成需求调研、产品设计、原型制作、效果评估。</li>
+            </ul>
+
+            <!-- 2、核心功能清单 -->
+            <h3>2、核心功能清单（用户端+管理端）</h3>
+            <div style="overflow-x:auto; margin:15px 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+                    <thead>
+                        <tr style="background:#1e3a8a; color:#fff;">
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">角色</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">模块</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">核心功能</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="3" style="padding:10px; border:1px solid #ddd; font-weight:600; vertical-align:top;">普通员工</td><td style="padding:10px; border:1px solid #ddd;">智能问答</td><td style="padding:10px; border:1px solid #ddd;">自然语言提问、答案溯源、多轮对话、反馈评价</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">文档浏览</td><td style="padding:10px; border:1px solid #ddd;">目录导航、全文检索、收藏文档</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">个人中心</td><td style="padding:10px; border:1px solid #ddd;">对话历史、我的收藏、个人信息</td></tr>
+                        <tr><td rowspan="5" style="padding:10px; border:1px solid #ddd; font-weight:600; vertical-align:top;">运营/管理员</td><td style="padding:10px; border:1px solid #ddd;">知识库管理</td><td style="padding:10px; border:1px solid #ddd;">文档上传、列表管理、重新索引、版本控制</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">检索测试</td><td style="padding:10px; border:1px solid #ddd;">命中测试、参数调试、人工标注</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">监控看板</td><td style="padding:10px; border:1px solid #ddd;">自助解决率、未命中率、高频问题分析</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">BadCase管理</td><td style="padding:10px; border:1px solid #ddd;">差评收集、人工修正、效果追踪</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">系统配置</td><td style="padding:10px; border:1px solid #ddd;">分块策略、模型参数、权限管理</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 3、产品方案亮点 -->
+            <h3>3、产品方案亮点</h3>
+            <ul style="margin-bottom:15px;">
+                <li><strong>检索优化：</strong>混合检索（向量+关键词）提升召回率，通过A/B测试确定最优分块大小。</li>
+                <li><strong>置信度机制：</strong>检索结果置信度&lt;0.6时自动转人工，并附原文链接，平衡自动化与准确率。</li>
+                <li><strong>运营闭环：</strong>BadCase自动入库，运营可修正答案、补充文档，形成持续优化机制。</li>
+            </ul>
+
+            <!-- 4、产品架构流程 -->
+            <h3>4、产品架构流程</h3>
+            <p><strong>（1）智能问答流程：</strong></p>
+            <div style="margin:15px 0; text-align:center;">
+                <img src="images/page2_IM44_0.jpg" alt="智能问答流程架构图" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+
+            <!-- 5、关键界面原型 -->
+            <h3>5、关键界面原型</h3>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图1】用户端智能问答主界面</strong></p>
+                <img src="images/page3_IM48_1.jpg" alt="用户端智能问答主界面" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图2】文档详情预览（从答案点击中跳转）</strong></p>
+                <img src="images/page3_IM49_2.jpg" alt="文档详情预览" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图3】知识库管理后台（文档列表+上传）</strong></p>
+                <img src="images/page4_IM52_3.jpg" alt="知识库管理后台" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图4】监控看板（核心指标）</strong></p>
+                <img src="images/page4_IM53_4.jpg" alt="监控看板" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图5】BadCase管理</strong></p>
+                <img src="images/page5_IM56_5.jpg" alt="BadCase管理" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+
+            <!-- 项目成果 -->
+            <h3>项目成果</h3>
+            <div class="data-box" style="margin:15px 0;">
+                <div class="data-item">
+                    <span>82%</span>
+                    <label>自助解决率</label>
+                </div>
+                <div class="data-item">
+                    <span>15min → 30s</span>
+                    <label>员工查询时间</label>
+                </div>
+                <div class="data-item">
+                    <span>4.6/5</span>
+                    <label>用户满意度</label>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ 模态框：项目二 企业级智能客服售后Agent产品 ============ -->
+    <div id="dialog-design" class="modal" onclick="closeModal(event, 'dialog-design')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="document.getElementById('dialog-design').style.display='none'">&times;</span>
+            <div class="modal-inner">
+
+            <h2>项目二：企业级智能客服售后Agent产品</h2>
+            <hr style="margin:20px 0;">
+
+            <!-- 1、项目概述 -->
+            <h3 style="margin-top:20px;">1、项目概述</h3>
+            <ul style="margin-bottom:15px;">
+                <li><strong>背景：</strong>某智能安防厂商通过数百家经销商销售产品，售后咨询日均300+，技术人员疲于应付，高危操作无管控，问题解决周期长达2-3天。</li>
+                <li><strong>目标：</strong>构建7x24小时智能售后Agent，实现自助问答、高危拦截、多系统联动，无法解决时无缝转人工。</li>
+                <li><strong>我的角色：</strong>产品负责人，主导AI需求定义、AI解决方案设计、技术选型、项目管理及项目的上线迭代。</li>
+            </ul>
+
+            <!-- 2、核心功能清单 -->
+            <h3>2、核心功能清单（用户端+客服端+管理端）</h3>
+            <div style="overflow-x:auto; margin:15px 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+                    <thead>
+                        <tr style="background:#1e3a8a; color:#fff;">
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">角色</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">模块</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">核心功能</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="4" style="padding:10px; border:1px solid #ddd; font-weight:600; vertical-align:top;">用户</td><td style="padding:10px; border:1px solid #ddd;">智能问答</td><td style="padding:10px; border:1px solid #ddd;">意图识别、多轮对话、知识库问答、高危拦截、反馈评价</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">业务办理</td><td style="padding:10px; border:1px solid #ddd;">保修查询、维修申请、订单查询</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">转人工</td><td style="padding:10px; border:1px solid #ddd;">主动/被动转人工，上下文无缝传递</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">个人中心</td><td style="padding:10px; border:1px solid #ddd;">工单记录、设备管理</td></tr>
+                        <tr><td rowspan="2" style="padding:10px; border:1px solid #ddd; font-weight:600; vertical-align:top;">客服</td><td style="padding:10px; border:1px solid #ddd;">客服工作台</td><td style="padding:10px; border:1px solid #ddd;">对话接管、用户信息摘要、快捷创建工单、转接会话</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">工单管理</td><td style="padding:10px; border:1px solid #ddd;">工单列表、状态更新、备注记录</td></tr>
+                        <tr><td rowspan="4" style="padding:10px; border:1px solid #ddd; font-weight:600; vertical-align:top;">管理员</td><td style="padding:10px; border:1px solid #ddd;">知识库管理</td><td style="padding:10px; border:1px solid #ddd;">文档上传、检索测试、版本管理</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">规则配置</td><td style="padding:10px; border:1px solid #ddd;">高危词库、转人工条件、Prompt模板</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">监控看板</td><td style="padding:10px; border:1px solid #ddd;">自助解决率、转人工率、情绪分布、BadCase分析</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd;">系统配置</td><td style="padding:10px; border:1px solid #ddd;">API集成、模型参数、操作日志</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 3、产品方案亮点 -->
+            <h3>3、产品方案亮点</h3>
+            <ul style="margin-bottom:15px;">
+                <li><strong>混合架构设计：</strong>规则引擎（高危词拦截）+ 大模型意图识别 + 传统模型置信度阈值，兼顾安全与灵活。</li>
+                <li><strong>Agent三层架构：</strong>意图识别层、任务规划层、工具调用层，实现复杂业务场景。</li>
+                <li><strong>安全兜底机制：</strong>高危操作100%拦截，低置信度转人工，所有转人工场景携带完整上下文。</li>
+            </ul>
+
+            <!-- 4、关键界面原型 -->
+            <h3>4、关键页面原型</h3>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图1】移动端智能问答主界面（APP）</strong></p>
+                <img src="images/page6_IM61_6.jpg" alt="移动端智能问答主界面" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图2】Web端智能问答主界面</strong></p>
+                <img src="images/page7_IM64_7.jpg" alt="Web端智能问答主界面" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图3】客服工作台（人工接管界面）</strong></p>
+                <img src="images/page7_IM65_8.jpg" alt="客服工作台" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图4】工单管理列表</strong></p>
+                <img src="images/page8_IM68_9.jpg" alt="工单管理列表" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图5】监控看板</strong></p>
+                <img src="images/page8_IM69_10.jpg" alt="监控看板" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+            <div style="margin:15px 0; text-align:center;">
+                <p><strong>【原型图6】Prompt管理</strong></p>
+                <img src="images/page9_IM72_11.jpg" alt="Prompt管理" style="max-width:100%; border:1px solid #ddd; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            </div>
+
+            <!-- 项目成果 -->
+            <h3>5、项目成果</h3>
+            <div class="data-box" style="margin:15px 0;">
+                <div class="data-item">
+                    <span>5min → 30s</span>
+                    <label>平均响应时间</label>
+                </div>
+                <div class="data-item">
+                    <span>100%</span>
+                    <label>高危拦截率</label>
+                </div>
+                <div class="data-item">
+                    <span>65% → 28%</span>
+                    <label>转人工率</label>
+                </div>
+            </div>
+
+            <!-- 能力总结 -->
+            <h3>四、能力总结</h3>
+            <div style="overflow-x:auto; margin:15px 0;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+                    <thead>
+                        <tr style="background:#1e3a8a; color:#fff;">
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">能力维度</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">体现项目</th>
+                            <th style="padding:10px; border:1px solid #ddd; text-align:left;">具体说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding:10px; border:1px solid #ddd; font-weight:600;">业务理解</td><td style="padding:10px; border:1px solid #ddd;">两个项目</td><td style="padding:10px; border:1px solid #ddd;">深入B端售后、企业知识管理场景，精准识别痛点并转化为产品目标</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd; font-weight:600;">产品设计</td><td style="padding:10px; border:1px solid #ddd;">全部</td><td style="padding:10px; border:1px solid #ddd;">输出完整PRD、高保真原型、业务流程图，兼顾用户端与后台管理</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd; font-weight:600;">技术理解</td><td style="padding:10px; border:1px solid #ddd;">智能售后Agent</td><td style="padding:10px; border:1px solid #ddd;">掌握大模型应用、RAG、Agent架构、混合架构设计、置信度机制</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd; font-weight:600;">数据驱动</td><td style="padding:10px; border:1px solid #ddd;">两个项目</td><td style="padding:10px; border:1px solid #ddd;">定义核心指标，建立监控看板，通过BadCase闭环持续优化</td></tr>
+                        <tr><td style="padding:10px; border:1px solid #ddd; font-weight:600;">项目管理</td><td style="padding:10px; border:1px solid #ddd;">全部</td><td style="padding:10px; border:1px solid #ddd;">跨团队协调资源，敏捷迭代，确保项目按期交付并持续迭代</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增：返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </div>
+
+    <script>
+        // 动态日期
+        document.getElementById('update-date').innerText = new Date().toLocaleDateString();
+
+        // 新增：监听滚动显示/隐藏返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        };
+
+        // 模态框控制
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // 禁止背景滚动
+        }
+
+        function closeModal(event, id) {
+            document.getElementById(id).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // 复制功能
+        function copyToClipboard(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert('邮箱已复制到剪贴板！');
+        }
+
+        // 关闭所有模态框
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            document.body.style.overflow = 'auto';
+        }
+
+        // 点击 ESC 关闭模态框
+        window.onkeydown = function(event) {
+            if (event.key === "Escape") {
+                closeAllModals();
+            }
+        }
+    </script>
+</body>
+</html>
