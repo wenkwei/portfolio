@@ -599,7 +599,6 @@
     <!-- 底部 -->
     <footer>
         <p>© 2024 温柯伟 | AI产品经理作品集</p>
-        <p>最后更新：<span id="update-date"></span></p>
     </footer>
 
     <!-- ============ 模态框：项目一 企业智能知识库(RAG) ============ -->
@@ -826,9 +825,6 @@
     </div>
 
     <script>
-        // 动态日期
-        document.getElementById('update-date').innerText = new Date().toLocaleDateString();
-
         // 新增：监听滚动显示/隐藏返回顶部按钮
         const backToTopBtn = document.getElementById('backToTop');
         window.onscroll = function() {
